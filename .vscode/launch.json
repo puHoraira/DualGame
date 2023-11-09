@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/sayonara/finalof25/tictactoe_mainbugless (copy)",
-      "program": "/home/sayonara/finalof25/tictactoe_mainbugless (copy)/build/Debug/outDebug",
+      "cwd": "/home/sayonara/projectfinal/DualGame",
+      "program": "/home/sayonara/projectfinal/DualGame/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

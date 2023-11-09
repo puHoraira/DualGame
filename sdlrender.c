@@ -19,13 +19,14 @@ void renderStartScreen(SDL_Renderer *renderer, int arr[])
     char *singleButton = "Press 1 for singleplayer";
     char *doubleButton = "Press 2 for doubleplayer";
     char *gameName = "Tic Tac Toe";
+    char *backbutton = "Press 3 for menu";
     TTF_Font *monaco = TTF_OpenFont(f_font, 24);
     if (monaco == NULL)
     {
         printf("Error opening font: %s\n", SDL_GetError());
         return;
     }
-    SDL_Color yellow = {239, 239, 40};
+    SDL_Color yellow = {239, 9, 40};
     SDL_Surface *singleButtonSurface = TTF_RenderText_Blended(monaco, singleButton, yellow);
     SDL_Texture *singleButtonTexture = SDL_CreateTextureFromSurface(renderer, singleButtonSurface);
     if (!singleButtonTexture)
@@ -56,15 +57,25 @@ void renderStartScreen(SDL_Renderer *renderer, int arr[])
         return;
     }
 
+    SDL_Surface *backSurface = TTF_RenderText_Blended(monaco, backbutton, yellow);
+    SDL_Texture *backTexture = SDL_CreateTextureFromSurface(renderer, backSurface);
+    if (!backTexture)
+    {
+        printf("error creating texture: %s\n", SDL_GetError());
+        SDL_FreeSurface(gameNameSurface);
+        TTF_CloseFont(monaco);
+        return;
+    }
+
     SDL_Rect single_button_rect;
     single_button_rect.x = (WINDOW_WIDTH - singleButtonSurface->w) / 2;
-    single_button_rect.y = (WINDOW_HEIGHT - singleButtonSurface->h) / 2 + 50;
+    single_button_rect.y = (WINDOW_HEIGHT - singleButtonSurface->h) / 2;
     single_button_rect.w = singleButtonSurface->w;
     single_button_rect.h = singleButtonSurface->h;
 
     SDL_Rect double_button_rect;
     double_button_rect.x = (WINDOW_WIDTH - doubleButtonSurface->w) / 2;
-    double_button_rect.y = (WINDOW_HEIGHT - doubleButtonSurface->h) / 2 + 100;
+    double_button_rect.y = (WINDOW_HEIGHT - doubleButtonSurface->h) / 2 + 40;
     double_button_rect.w = doubleButtonSurface->w;
     double_button_rect.h = doubleButtonSurface->h;
 
@@ -74,14 +85,23 @@ void renderStartScreen(SDL_Renderer *renderer, int arr[])
     game_name_rect.w = gameNameSurface->w;
     game_name_rect.h = gameNameSurface->h;
 
+    SDL_Rect back_rect;
+    back_rect.x = (WINDOW_WIDTH - backSurface->w) / 2;
+    back_rect.y = (WINDOW_HEIGHT - backSurface->h) / 2 + 100;
+    back_rect.w = backSurface->w;
+    back_rect.h = backSurface->h;
+
+    SDL_RenderCopy(renderer, backTexture, NULL, &back_rect);
+    SDL_RenderCopy(renderer, gameNameTexture, NULL, &game_name_rect);
     SDL_RenderCopy(renderer, singleButtonTexture, NULL, &single_button_rect);
     SDL_RenderCopy(renderer, doubleButtonTexture, NULL, &double_button_rect);
-    SDL_RenderCopy(renderer, gameNameTexture, NULL, &game_name_rect);
 
     SDL_FreeSurface(singleButtonSurface);
     SDL_FreeSurface(doubleButtonSurface);
     SDL_FreeSurface(gameNameSurface);
+    SDL_FreeSurface(backSurface);
     SDL_DestroyTexture(singleButtonTexture);
+    SDL_DestroyTexture(backTexture);
     SDL_DestroyTexture(doubleButtonTexture);
     SDL_DestroyTexture(gameNameTexture);
     TTF_CloseFont(monaco);

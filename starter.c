@@ -5,6 +5,7 @@
 
 #include "global.h"
 #include "starter.h"
+#include "credit.h"
 
 SDL_Window *gwindow = NULL;
 SDL_Renderer *grenderer = NULL;
@@ -147,7 +148,6 @@ int starter()
             }
             if (e.key.keysym.sym == SDLK_3)
             {
-                printf("G");
                 SDL_DestroyRenderer(grenderer);
                 SDL_DestroyWindow(gwindow);
                 SDL_Quit();

@@ -3,9 +3,9 @@
 
 #include <SDL2/SDL_ttf.h>
 
-void renderStartScreen(SDL_Renderer* renderer, int arr[]);
-void renderGameScreen(SDL_Renderer* renderer, int arr[]);
-void renderScoreScreen(SDL_Renderer* renderer, int arr[], int winner);
-void renderGame(SDL_Renderer* renderer, int arr[], int winner);
+void renderStartScreen(SDL_Renderer *renderer, int arr[]);
+void renderGameScreen(SDL_Renderer *renderer, int arr[]);
+void renderScoreScreen(SDL_Renderer *renderer, int arr[], int winner);
+void renderGame(SDL_Renderer *renderer, int arr[], int winner);
 
-#endif      // SDL_RENDER_H
+#endif // SDL_RENDER_H

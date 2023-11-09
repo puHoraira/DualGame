@@ -19,7 +19,7 @@ void creditpagestarts(SDL_Renderer *crenderer)
     char *horaira = "MD. Abu Horaira";
     char *adib = "Md. Adib Ahsan";
     char *avi = "Shraban Karmoker Avi";
-    char *final = "Thanks for visit.";
+    char *final = "Press 1 to go back";
     TTF_Font *monaco = TTF_OpenFont(c_font, 28);
     if (monaco == NULL)
     {
@@ -135,11 +135,12 @@ int creditpagesec()
             {
                 if (e.key.keysym.sym == SDLK_1)
                 {
+
                     SDL_DestroyRenderer(crenderer);
                     SDL_DestroyWindow(cwindow);
                     SDL_Quit();
                     TTF_Quit();
-                    return 0;
+                    return 6;
                 }
             }
         }

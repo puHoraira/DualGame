@@ -3,9 +3,13 @@
 #include <stdbool.h>
 #include <math.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "global.h"
 #include "sdlevent.h"
+#include "starter.h"
+#include "extra.h"
 
 extern int screen_state;
 extern int play_mode;
@@ -28,12 +32,12 @@ int checkWinner(int arr[])
         {
             if (arr[i] == X)
             {
-                printf("F1");
+                // printf("F1");
                 return PLAYER_X;
             }
             else
             {
-                printf("%dF2\n", i);
+                // printf("%dF2\n", i);
                 return PLAYER_O;
             }
         }
@@ -46,12 +50,12 @@ int checkWinner(int arr[])
         {
             if (arr[j] == X)
             {
-                printf("F3");
+                // printf("F3");
                 return PLAYER_X;
             }
             if (arr[j] == O)
             {
-                printf("F4");
+                // printf("F4");
                 return PLAYER_O;
             }
         }
@@ -62,12 +66,12 @@ int checkWinner(int arr[])
     {
         if (arr[0] == X)
         {
-            printf("F5");
+            // printf("F5");
             return PLAYER_X;
         }
         if (arr[0] == O)
         {
-            printf("F6");
+            // printf("F6");
             return PLAYER_O;
         }
     }
@@ -75,12 +79,12 @@ int checkWinner(int arr[])
     {
         if (arr[2] == X)
         {
-            printf("F7");
+            // printf("F7");
             return PLAYER_X;
         }
         if (arr[2] == O)
         {
-            printf("F8");
+            //         printf("F8");
             return PLAYER_O;
         }
     }
@@ -126,7 +130,7 @@ bool handleStartScreenEvent(SDL_Event *event, int arr[])
 
     if (event->type == SDL_KEYDOWN)
     {
-        if (event->key.keysym.sym == SDLK_1 || event->key.keysym.sym == SDLK_2)
+        if (event->key.keysym.sym == SDLK_1 || event->key.keysym.sym == SDLK_2 || event->key.keysym.sym == SDLK_3)
         {
             for (int i = 0; i < 9; ++i)
             {
@@ -142,6 +146,12 @@ bool handleStartScreenEvent(SDL_Event *event, int arr[])
             else if (event->key.keysym.sym == SDLK_2)
             {
                 play_mode = DOUBLEPLAYER;
+            }
+            else if (event->key.keysym.sym == SDLK_3)
+            {
+                SDL_Quit();
+                TTF_Quit();
+                all();
             }
         }
     }
@@ -285,7 +295,7 @@ bool handleScoreScreenEvent(SDL_Event *event, int arr[])
 
 int computerTurn(int arr[])
 {
-    for (int i = 0; i < 9; i++)
+    for (int i = 8; i >= 0; i--)
     {
         if (arr[i] == BLANK)
         {

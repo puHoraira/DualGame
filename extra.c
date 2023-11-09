@@ -14,11 +14,10 @@
 
 int screen_state;
 int current_player;
-int play_mode; // single or double player
+int play_mode;
 
-int main(int argc, char *argv[])
+int all()
 {
-    /* Initialize the game board */
     int selector = starter();
     if (selector == tictactoe)
     {
@@ -53,9 +52,6 @@ int main(int argc, char *argv[])
             SDL_Quit();
             return EXIT_FAILURE;
         }
-
-        SDL_Surface *icon = IMG_Load("assets/icon.png");
-        SDL_SetWindowIcon(window, icon);
 
         SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
         if (!renderer)
@@ -101,11 +97,14 @@ int main(int argc, char *argv[])
     }
     else if (selector == chess)
     {
-        }
+        
+    }
     else if (selector == credit)
     {
-        creditpagesec();
+        int m = creditpagesec();
+        if (m == 6)
+        {
+            all();
+        }
     }
-
-    return 0;
 }
